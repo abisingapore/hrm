@@ -1,0 +1,291 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block extra_style %}
+    <style type="text/css">
+
+
+        @font-face {
+        font-family: 'HelveticaCondensed';
+        src: url(http://abisingapore.webfactional.com/static/fonts/HelveticaNeueLTCom-BdCn.ttf);
+        }
+
+        @font-face {
+        font-family: 'HelveticaCondensedLight';
+        src: url(http://abisingapore.webfactional.com/static/fonts/HelveticaNeueLTCom-LtCn.ttf);
+        }
+
+        body {
+            color: #333333;
+            line-height: 0.1em;
+        }
+
+        @page {
+            size: a4 portrait;
+            @frame header_frame {
+                -pdf-frame-content: header_content;
+                left:30pt; width:532pt; top:10pt; height:50pt;
+            }
+
+            @frame content_frame {
+                left: 30pt; width: 532pt; top: 70pt; height: 740pt;
+            }
+
+            @frame footer_frame {
+                -pdf-frame-content: footer_content;
+                left: 20pt; width: 542pt; top: 828pt; height: 30pt;
+            }
+
+
+        }
+
+        .name {
+            font-weight:100;
+            font-size:40px;
+            margin-bottom:0;
+        }
+
+        .description {
+            font-size:11px;
+            line-height:0;
+            margin-top:5px;
+        }
+
+        #content {
+            margin:0;
+            padding:0;
+
+        }
+
+        .main {
+            margin:0;
+            padding:0;
+        }
+
+        .corporate {
+            color:#186cab;
+        }
+        #footer_content p{
+            font-size:10px;
+        }
+
+        h2{
+            font-family : 'Helvetica Neue', Arial, sans-serif;
+            font-weight:100;
+            font-size:28px;
+            margin:0;
+        }
+
+        p {
+            color: black;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size:12px;
+            margin:0;
+        }
+
+        h3.large{
+            font-size:20px;
+            margin:0;
+            font-weight:100;
+        }
+
+        .cv_name {
+            font-weight:100;
+        }
+
+        .larger {
+            font-size:50px;
+            margin:0;
+            font-family: 'HelveticaCondensedLight';
+            font-weight:100;
+            text-align:right;
+            color:#000;
+        }
+
+        .summary {
+            line-height:1.5em;
+        }
+
+        p {
+            line-height:1.5em;
+        }
+
+        .specialization {
+            font-family: 'HelveticaCondensedLight', Arial, sans-serif;
+            font-size:42px;
+            color:#696969;
+            text-align:right;
+        }
+
+        hr.style-three {
+        border: 0;
+        border-bottom: 1px dashed #ccc;
+        background: #999;
+        color:#ccc;
+        }
+
+        .important {
+            font-size:13px;
+            text-align:right;
+        }
+
+        .chunk {
+            -pdf-keep-with-next: true;
+        }
+
+        .separator {
+            -pdf-keep-with-next:false;
+            font-size:6pt;
+        }
+
+        .label {
+            background-color:#186cab;
+            color:#fff;
+            width:100%;
+            padding:8px;
+            margin:0;
+            border-radius:5px;
+            font-family: 'HelveticaCondensedLight', Helvetica, Arial, sans-serif;
+        }
+
+        .left-col {
+            width:20%;
+            display:inline;
+            float:left;
+            border: 1px solid red;
+
+        }
+
+        .right-col {
+            left:100px;
+            display:inline;
+            float:left;
+            border:1px solid red;
+        }
+
+        .right {
+            text-align:right;
+        }
+
+        th, tr {
+            text-align:top left;
+            margin-left:0;
+            font-size:8px;
+        }
+
+        .date {
+            font-style:bold;
+            font-size:13px;
+            text-align:right;
+        }
+
+        .blue {
+            color:#186cab;
+        }
+
+        td {
+            font-size:8px;
+            background-color: white;
+            border:none;
+            text-align:left;
+            padding:2px;
+            vertical-align:top;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+<body>
+        <div id="header_content">
+            <img src="{{ STATIC_URL }}img/finalheader.jpg">
+        </div>
+        <div id="footer_content">
+            <p><span class="corporate">ABI Resources & Services Pte Ltd</span> T: +65 64546066 F: +65 64548891 abiadmin@abisingapore.com 910J Upper Thomson Road, Singapore 787112 &nbsp;&nbsp; <b>Page <pdf:pagenumber> of <pdf:pagecount></b>
+            </span></p>
+        </div>
+
+        <h2 class="larger"><span class="cv_name">{{ applicant.first_name|capfirst }} <span class="blue">{{ applicant.last_name|capfirst }}</span></span></h2>
+        <p class="specialization">{{ applicant.proposed_specialization|capfirst }}</p>
+        <p class="important">Age: <b>{{ applicant.age }}</b> | Nationality: <b>{{ applicant.nationality.name }}<img src="{{ STATIC_URL }}flags/{{ applicant.nationality|lower }}.jpg"></b> | Gender: <b>{{ applicant.gender|lower|capfirst }}</b> </p>
+        {% if applicant.add_nationality %}
+        <p class="important">Additional Visas: <b>{{ applicant.add_nationality.name }} {{ applicant.add_nat_status }}</b></p>
+        {% endif %}
+        <br>
+
+        <h3 class="large label">Summary of Experience</h3><br>
+        <p class="summary">{{ applicant.abi_summary }}</p><br>
+
+
+        <h3 class="large label">Professional Qualifications</h3><br>
+        {% for q in qualification %}
+        <p><b>{{ q.qualification }} {{ q.discipline }}</b></p>
+        <p>Awarding Institution: {{ q.university }}</p>
+        <p>Year of Completion: {{ q.year_of_completion }}</p>
+        <hr class="style-three">
+        <br>
+        {% endfor %}
+        <br>
+
+        {% if certification %}
+        <div class="chunk">
+            <h3 class="large label">Technical Certifications</h3><br>
+            <table>
+                <tr>
+                    <td>
+                        {% for c in certification %}
+                        <p>{{ forloop.counter }}. <b>{{ c.name }}</b> {% if c.registration_number %}| Reg.No: {{ c.registration_number }}{% endif %} {% if c.expiry_date %}| Expiry Date: {{ c.expiry_date }}{% endif %}</p>
+                        {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        {% endif %}
+
+
+        <div class="chunk">
+            <h3 class="large label">Skills</h3><br>
+            <table>
+                <tr>
+                    <td style="width:30%; text-align:left;">
+                        <p>Language Proficiency:</p>
+                        <p>IT Skills:</p>
+                    </td>
+                    <td>
+                        <p>{{ applicant.language_proficiency }}</p>
+                        <p>{{ applicant.computer_literacy }}</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+
+        <div class="chunk">
+            {% for h in history %}
+            {% if h == first %}<h3 class="large label">Employment History</h3><br>{% endif %}
+            <table>
+                <tr>
+                    <td style="width:20%; text-align:left;">
+                        <p>Company:</p>
+                        <p>Project Name:</p>
+                        <p>Position Held:</p>
+                        <p>Responsibilities:</p>
+                    </td>
+                    <td>
+                        <p style="width:100%;">{{ h.company_name }}<b class="date blue">{{ h.start_date|date:"M Y" }} to {{ h.end_date|date:"M Y" }}</b></p>
+                        <p>{{ h.project_name }}</p>
+                        <p>{{ h.position_held }}</p>
+                        <p>{{ h.responsibilities }}</p>
+                        
+                    </td>
+                </tr>
+            </table>
+            
+
+            <hr>
+            <p class="separator">&nbsp;</p>
+            {% endfor %}
+        </div>
+
+</body>
+{% endblock %}

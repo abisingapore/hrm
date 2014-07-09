@@ -1,0 +1,724 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<body>
+    <div class="header-container" style="background:#384047">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="header">
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid top-navigation">
+
+                                <div class="navbar-header">
+                                    <button class="navbar-toggle" data-target= "#navbar-collapse-1" data-toggle="collapse"id="toggle-button" type= "button">
+                                      <span class="sr-only">Toggle Navigation</span>
+                                      <span class="icon-bar"></span>
+                                      <span class="icon-bar"></span>
+                                      <span class="icon-bar"></span>
+                                    </button> <a href= "#"><img class="header-logo" src= "{% static "img/header-logo.png" %}"></a>
+                                </div>
+
+                                <div class="collapse navbar-collapse" id= "navbar-collapse-1">
+                                    <ul class="nav navbar-nav navbar-right" id= "top-nav-links">
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">Services</a></li>
+                                        <li><a href="#">Projects</a></li>
+                                        <li><a data-target="#contactInfo"data-toggle="modal" href= "#">Contact</a></li>
+                                        <li><a href="#">Sign Up</a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </nav>
+
+                        <h1 class="header-title-big">Join us on a new career path.</h1>
+                        <h6>Tell us all about yourself, upload your CV. We want you!</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL DIALOG -->
+	<div class="modal fade" id="contactInfo" tabindex="-1">
+	  	<div class="modal-dialog">
+	    	<div class="modal-content">
+
+	     		<div class="modal-header">
+	        		<button class="close"data-dismiss="modal" type= "button">×</button>
+	        		<h4 class="modal-title" id= "contactInfoLabel">Contact Us</h4>
+	      		</div>
+
+		      	<div class="modal-body address">
+		        	<form>
+		          		<div class="form-group">
+		            		<label for="exampleInputEmail1">Full Name</label>
+		            		<input class="form-control" id= "exampleInputEmail1"placeholder= "Enter email" type= "email">
+		          		</div>
+
+			          	<div class="form-group">
+				            <label for="exampleInputPassword1"> Email</label>
+				            <input class="form-control" id= "exampleInputPassword1"placeholder="Password"type="password">
+			          	</div>
+
+			          	<div class="form-group">
+				            <label for= "exampleInputFile">Enquiry</label>
+				            <textarea class= "form-control" rows= "3"></textarea>
+			          	</div>
+
+		          		<button class= "btn btn-default" type= "submit">Submit</button>
+		        	</form>
+		        	<img src="{% static "img/contact-logo.png" %}" />
+
+		        	<br>
+
+			        <p>910J Upper Thomson Road</p>
+			        <p>Singapore 787112</p>
+			        <p><abbr title= "Phone">P:</abbr> (+65) 64546066</p>
+			        <p><abbr title="Fax">F:</abbr> (+65) 64548891</p>
+			        <p> abiadmin@abisingapore.com</p>
+
+			        <ul class= "footer-nav modal-social social-media">
+			          <li><a href=""></a></li>
+			          <li><a href=""></a></li>
+			          <li><a href=""></a></li>
+			          <li><a href=""></a></li>
+			        </ul>
+		      	</div>
+
+		      <div class="modal-footer">
+		        <button class="btn btn-default"data-dismiss="modal" type= "button">Close</button>
+		      </div>
+
+	    	</div>
+	  	</div>
+	</div>
+    <!--endModal-->
+
+    <!--Start of Sign up Form -->
+    <div class="container">
+        <div class="row">
+            <div class="form-body">
+                <div class="form-content">
+	                    <form action="" method="POST">
+		                    {% csrf_token %}
+		                    {{ form.errors }}
+
+                    		<!-- SECTION 1 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <h2 class="form-header"><span class= "section-number">1</span> Personal Details</h2>
+	                            </div>
+	                        </div>
+
+                        	<!-- First and Last Name -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id= "id_first_name" name="first_name" placeholder="First Name*" type="text">
+	                                </div>
+	                            </div>
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id= "id_last_name" name="last_name" placeholder="Last Name"type="text">
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <!-- Date of Birth and Nationality -->
+	                        <div class="row">
+		                    	<div class="col-md-6">
+		                    		<span class="help-block">Please select your date of birth.</span>
+		                        	<div class="form-group">
+		                        		<select class="form_control" id="id_date_of_birth_day" name="date_of_birth_day" style="width:33%">
+											<option value="0">Day</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+											<option value="24">24</option>
+											<option value="25">25</option>
+											<option value="26">26</option>
+											<option value="27">27</option>
+											<option value="28">28</option>
+											<option value="29">29</option>
+											<option value="30">30</option>
+											<option value="31">31</option>
+		                        		</select>
+		                        		<select class="form_control" id="id_date_of_birth_month" name="date_of_birth_month" style="width:33%">
+											<option value="0">Month</option>
+											<option value="1">January</option>
+											<option value="2">February</option>
+											<option value="3">March</option>
+											<option value="4">April</option>
+											<option value="5">May</option>
+											<option value="6">June</option>
+											<option value="7">July</option>
+											<option value="8">August</option>
+											<option value="9">September</option>
+											<option value="10">October</option>
+											<option value="11">November</option>
+											<option value="12">December</option>
+		                        		</select>
+		                        		<select class="form_control" id="id_date_of_birth_year" name="date_of_birth_year" style="width:32%">
+											<option value="0">Year</option>
+											{% for year in years %}
+											<option value="{{year}}">{{year}}</option>
+											{% endfor %}
+		                        		</select>
+		                        	</div>
+		                        </div>
+	                            <div class="col-md-6">
+		                        	<div class="form-group">
+		                        	<span class="help-block">Please select your Nationality.</span>
+										 <select class="form-control" id="id_nationality" name="nationality"><option value selected="selected"> Select Nationality </option><option value="AF"> Afghanistan </option><option value="AL"> Albania </option><option value="DZ"> Algeria </option><option value="AS"> American Samoa </option><option value="AD"> Andorra </option><option value="AO"> Angola </option><option value="AI"> Anguilla </option><option value="AQ"> Antarctica </option><option value="AG"> Antigua and Barbuda </option><option value="AR"> Argentina </option><option value="AM"> Armenia </option><option value="AW"> Aruba </option><option value="AU"> Australia </option><option value="AT"> Austria </option><option value="AZ"> Azerbaijan </option><option value="BS"> Bahamas </option><option value="BH"> Bahrain </option><option value="BD"> Bangladesh </option><option value="BB"> Barbados </option><option value="BY"> Belarus </option><option value="BE"> Belgium </option><option value="BZ"> Belize </option><option value="BJ"> Benin </option><option value="BM"> Bermuda </option><option value="BT"> Bhutan </option><option value="BO"> Bolivia </option><option value="BA"> Bosnia and Herzegovina </option><option value="BW"> Botswana </option><option value="BV"> Bouvet Island </option><option value="BR"> Brazil </option><option value="IO"> British Indian Ocean Territory </option><option value="BN"> Brunei Darussalam </option><option value="BG"> Bulgaria </option><option value="BF"> Burkina Faso </option><option value="BI"> Burundi </option><option value="KH"> Cambodia </option><option value="CM"> Cameroon </option><option value="CA"> Canada </option><option value="CV"> Cape Verde </option><option value="KY"> Cayman Islands </option><option value="CF"> Central African Republic </option><option value="TD"> Chad </option><option value="CL"> Chile </option><option value="CN"> China </option><option value="CX"> Christmas Island </option><option value="CC"> Cocos (Keeling) Islands </option><option value="CO"> Colombia </option><option value="KM"> Comoros </option><option value="CG"> Congo </option><option value="CD"> Congo, The Democratic Republic of The </option><option value="CK"> Cook Islands </option><option value="CR"> Costa Rica </option><option value="CI"> Cote D'ivoire </option><option value="HR"> Croatia </option><option value="CU"> Cuba </option><option value="CY"> Cyprus </option><option value="CZ"> Czech Republic </option><option value="DK"> Denmark </option><option value="DJ"> Djibouti </option><option value="DM"> Dominica </option><option value="DO"> Dominican Republic </option><option value="EC"> Ecuador </option><option value="EG"> Egypt </option><option value="SV"> El Salvador </option><option value="GQ"> Equatorial Guinea </option><option value="ER"> Eritrea </option><option value="EE"> Estonia </option><option value="ET"> Ethiopia </option><option value="FK"> Falkland Islands (Malvinas) </option><option value="FO"> Faroe Islands </option><option value="FJ"> Fiji </option><option value="FI"> Finland </option><option value="FR"> France </option><option value="GF"> French Guiana </option><option value="PF"> French Polynesia </option><option value="TF"> French Southern Territories </option><option value="GA"> Gabon </option><option value="GM"> Gambia </option><option value="GE"> Georgia </option><option value="DE"> Germany </option><option value="GH"> Ghana </option><option value="GI"> Gibraltar </option><option value="GR"> Greece </option><option value="GL"> Greenland </option><option value="GD"> Grenada </option><option value="GP"> Guadeloupe </option><option value="GU"> Guam </option><option value="GT"> Guatemala </option><option value="GG"> Guernsey </option><option value="GN"> Guinea </option><option value="GW"> Guinea-bissau </option><option value="GY"> Guyana </option><option value="HT"> Haiti </option><option value="HM"> Heard Island and Mcdonald Islands </option><option value="VA"> Holy See (Vatican City State) </option><option value="HN"> Honduras </option><option value="HK"> Hong Kong </option><option value="HU"> Hungary </option><option value="IS"> Iceland </option><option value="IN"> India </option><option value="ID"> Indonesia </option><option value="IR"> Iran, Islamic Republic of </option><option value="IQ"> Iraq </option><option value="IE"> Ireland </option><option value="IM"> Isle of Man </option><option value="IL"> Israel </option><option value="IT"> Italy </option><option value="JM"> Jamaica </option><option value="JP"> Japan </option><option value="JE"> Jersey </option><option value="JO"> Jordan </option><option value="KZ"> Kazakhstan </option><option value="KE"> Kenya </option><option value="KI"> Kiribati </option><option value="KP"> Korea, Democratic People's Republic of </option><option value="KR"> Korea, Republic of </option><option value="KW"> Kuwait </option><option value="KG"> Kyrgyzstan </option><option value="LA"> Lao People's Democratic Republic </option><option value="LV"> Latvia </option><option value="LB"> Lebanon </option><option value="LS"> Lesotho </option><option value="LR"> Liberia </option><option value="LY"> Libyan Arab Jamahiriya </option><option value="LI"> Liechtenstein </option><option value="LT"> Lithuania </option><option value="LU"> Luxembourg </option><option value="MO"> Macao </option><option value="MK"> Macedonia, The Former Yugoslav Republic of </option><option value="MG"> Madagascar </option><option value="MW"> Malawi </option><option value="MY"> Malaysia </option><option value="MV"> Maldives </option><option value="ML"> Mali </option><option value="MT"> Malta </option><option value="MH"> Marshall Islands </option><option value="MQ"> Martinique </option><option value="MR"> Mauritania </option><option value="MU"> Mauritius </option><option value="YT"> Mayotte </option><option value="MX"> Mexico </option><option value="FM"> Micronesia, Federated States of </option><option value="MD"> Moldova, Republic of </option><option value="MC"> Monaco </option><option value="MN"> Mongolia </option><option value="ME"> Montenegro </option><option value="MS"> Montserrat </option><option value="MA"> Morocco </option><option value="MZ"> Mozambique </option><option value="MM"> Myanmar </option><option value="NA"> Namibia </option><option value="NR"> Nauru </option><option value="NP"> Nepal </option><option value="NL"> Netherlands </option><option value="AN"> Netherlands Antilles </option><option value="NC"> New Caledonia </option><option value="NZ"> New Zealand </option><option value="NI"> Nicaragua </option><option value="NE"> Niger </option><option value="NG"> Nigeria </option><option value="NU"> Niue </option><option value="NF"> Norfolk Island </option><option value="MP"> Northern Mariana Islands </option><option value="NO"> Norway </option><option value="OM"> Oman </option><option value="PK"> Pakistan </option><option value="PW"> Palau </option><option value="PS"> Palestinian Territory, Occupied </option><option value="PA"> Panama </option><option value="PG"> Papua New Guinea </option><option value="PY"> Paraguay </option><option value="PE"> Peru </option><option value="PH"> Philippines </option><option value="PN"> Pitcairn </option><option value="PL"> Poland </option><option value="PT"> Portugal </option><option value="PR"> Puerto Rico </option><option value="QA"> Qatar </option><option value="RE"> Reunion </option><option value="RO"> Romania </option><option value="RU"> Russian Federation </option><option value="RW"> Rwanda </option><option value="SH"> Saint Helena </option><option value="KN"> Saint Kitts and Nevis </option><option value="LC"> Saint Lucia </option><option value="PM"> Saint Pierre and Miquelon </option><option value="VC"> Saint Vincent and The Grenadines </option><option value="WS"> Samoa </option><option value="SM"> San Marino </option><option value="ST"> Sao Tome and Principe </option><option value="SA"> Saudi Arabia </option><option value="SN"> Senegal </option><option value="RS"> Serbia </option><option value="SC"> Seychelles </option><option value="SL"> Sierra Leone </option><option value="SG"> Singapore </option><option value="SK"> Slovakia </option><option value="SI"> Slovenia </option><option value="SB"> Solomon Islands </option><option value="SO"> Somalia </option><option value="ZA"> South Africa </option><option value="GS"> South Georgia and The South Sandwich Islands </option><option value="ES"> Spain </option><option value="LK"> Sri Lanka </option><option value="SD"> Sudan </option><option value="SR"> Suriname </option><option value="SJ"> Svalbard and Jan Mayen </option><option value="SZ"> Swaziland </option><option value="SE"> Sweden </option><option value="CH"> Switzerland </option><option value="SY"> Syrian Arab Republic </option><option value="TW"> Taiwan, Province of China </option><option value="TJ"> Tajikistan </option><option value="TZ"> Tanzania, United Republic of </option><option value="TH"> Thailand </option><option value="TL"> Timor-leste </option><option value="TG"> Togo </option><option value="TK"> Tokelau </option><option value="TO"> Tonga </option><option value="TT"> Trinidad and Tobago </option><option value="TN"> Tunisia </option><option value="TR"> Turkey </option><option value="TM"> Turkmenistan </option><option value="TC"> Turks and Caicos Islands </option><option value="TV"> Tuvalu </option><option value="UG"> Uganda </option><option value="UA"> Ukraine </option><option value="AE"> United Arab Emirates </option><option value="GB"> United Kingdom </option><option value="US"> United States </option><option value="UM"> United States Minor Outlying Islands </option><option value="UY"> Uruguay </option><option value="UZ"> Uzbekistan </option><option value="VU"> Vanuatu </option><option value="VE"> Venezuela </option><option value="VN"> Viet Nam </option><option value="VG"> Virgin Islands, British </option><option value="VI"> Virgin Islands, U.S. </option><option value="WF"> Wallis and Futuna </option><option value="EH"> Western Sahara </option><option value="YE"> Yemen </option><option value="ZM"> Zambia </option><option value="ZW"> Zimbabwe </option></select>
+		                        	</div>
+	                         	</div>
+	                        </div>
+
+	                        <!-- Email and Confirm Email -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id="id_email"placeholder="Email" type="email" name="email">
+	                                </div>
+	                            </div>
+
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id= "id_confirm_email" placeholder= "Confirm Email" type="email" name="confirm_email">
+	                                </div>
+	                            </div>
+	                        </div>
+
+                        	<!-- Contact Numbers (Mobile / Home) -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id= "id_contact_home" placeholder= "Contact Number (Home)" type="text" name="contact_home">
+	                                </div>
+	                            </div>
+
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id= "id_contact_mobile" placeholder= "Contact Number (Mobile)" type="text" name="contact_mobile">
+	                                </div>
+	                            </div>
+	                        </div>
+
+                        	<!-- Marital Status and Gender -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                            <span class="help-block">Please choose your marital status.</span>
+	                                <select class="form-control" id="id_marital_status" name="marital_status">
+	                                    <option value selected="selected"> Select Marital Status </option>
+	                                    <option value="SINGLE"> Single </option>
+	                                    <option value="MARRIED"> Married </option>
+	                                    <option value="DIVORCED"> Divorced </option>
+	                                    <option value="WIDOWED"> Widowed </option>
+	                                </select>
+	                            </div>
+
+	                            <div class="col-md-6">
+	                            	<span class="help-block">Please choose your gender.</span>
+	                                <select class="form-control" id="id_gender" name="gender">
+	                                    <option value selected="selected"> Select Gender </option>
+	                                    <option value="MALE"> Male </option>
+	                                    <option value="FEMALE"> Female </option>
+	                                </select>
+	                            </div>
+	                        </div>
+
+	                        <br>
+	                        <hr>
+
+                        	<!-- SECTION 2 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <h2 class="form-header"><span class="section-number">2</span> Address Details</h2>
+	                            </div>
+	                        </div>
+
+                        	<!-- Address Line 1 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group">
+	                                    <input class="form-control" id=
+	                                    "id_address_line_1" maxlength="300" placeholder=
+	                                    "Address Line 1" type="text" name="address_line_1">
+	                                </div>
+	                            </div>
+	                        </div>
+
+                        	<!-- Address Line 2 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group">
+	                                    <input class="form-control" id="id_address_line_2" placeholder="Address Line 2" maxlength="300" name="address_line_2" type="text">
+	                                </div>
+	                            </div>
+	                        </div>
+
+                        	<!-- City and State -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id="id_city" placeholder="City" type="text" name="city" maxlength="50">
+	                                </div>
+	                            </div>
+
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id="id_state" placeholder="State" type="text" name="state" maxlength="50">
+	                                </div>
+	                            </div>
+	                        </div>
+
+                        	<!-- Postal Code and Country -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id="id_postal_code" placeholder="Postal Code" type="text" name="postal_code">
+	                                </div>
+	                            </div>
+
+	                            <div class="col-md-6">
+									 <select class="form-control" id="id_country" name="country"><option value selected="selected"> Select Country </option><option value="AF"> Afghanistan </option><option value="AL"> Albania </option><option value="DZ"> Algeria </option><option value="AS"> American Samoa </option><option value="AD"> Andorra </option><option value="AO"> Angola </option><option value="AI"> Anguilla </option><option value="AQ"> Antarctica </option><option value="AG"> Antigua and Barbuda </option><option value="AR"> Argentina </option><option value="AM"> Armenia </option><option value="AW"> Aruba </option><option value="AU"> Australia </option><option value="AT"> Austria </option><option value="AZ"> Azerbaijan </option><option value="BS"> Bahamas </option><option value="BH"> Bahrain </option><option value="BD"> Bangladesh </option><option value="BB"> Barbados </option><option value="BY"> Belarus </option><option value="BE"> Belgium </option><option value="BZ"> Belize </option><option value="BJ"> Benin </option><option value="BM"> Bermuda </option><option value="BT"> Bhutan </option><option value="BO"> Bolivia </option><option value="BA"> Bosnia and Herzegovina </option><option value="BW"> Botswana </option><option value="BV"> Bouvet Island </option><option value="BR"> Brazil </option><option value="IO"> British Indian Ocean Territory </option><option value="BN"> Brunei Darussalam </option><option value="BG"> Bulgaria </option><option value="BF"> Burkina Faso </option><option value="BI"> Burundi </option><option value="KH"> Cambodia </option><option value="CM"> Cameroon </option><option value="CA"> Canada </option><option value="CV"> Cape Verde </option><option value="KY"> Cayman Islands </option><option value="CF"> Central African Republic </option><option value="TD"> Chad </option><option value="CL"> Chile </option><option value="CN"> China </option><option value="CX"> Christmas Island </option><option value="CC"> Cocos (Keeling) Islands </option><option value="CO"> Colombia </option><option value="KM"> Comoros </option><option value="CG"> Congo </option><option value="CD"> Congo, The Democratic Republic of The </option><option value="CK"> Cook Islands </option><option value="CR"> Costa Rica </option><option value="CI"> Cote D'ivoire </option><option value="HR"> Croatia </option><option value="CU"> Cuba </option><option value="CY"> Cyprus </option><option value="CZ"> Czech Republic </option><option value="DK"> Denmark </option><option value="DJ"> Djibouti </option><option value="DM"> Dominica </option><option value="DO"> Dominican Republic </option><option value="EC"> Ecuador </option><option value="EG"> Egypt </option><option value="SV"> El Salvador </option><option value="GQ"> Equatorial Guinea </option><option value="ER"> Eritrea </option><option value="EE"> Estonia </option><option value="ET"> Ethiopia </option><option value="FK"> Falkland Islands (Malvinas) </option><option value="FO"> Faroe Islands </option><option value="FJ"> Fiji </option><option value="FI"> Finland </option><option value="FR"> France </option><option value="GF"> French Guiana </option><option value="PF"> French Polynesia </option><option value="TF"> French Southern Territories </option><option value="GA"> Gabon </option><option value="GM"> Gambia </option><option value="GE"> Georgia </option><option value="DE"> Germany </option><option value="GH"> Ghana </option><option value="GI"> Gibraltar </option><option value="GR"> Greece </option><option value="GL"> Greenland </option><option value="GD"> Grenada </option><option value="GP"> Guadeloupe </option><option value="GU"> Guam </option><option value="GT"> Guatemala </option><option value="GG"> Guernsey </option><option value="GN"> Guinea </option><option value="GW"> Guinea-bissau </option><option value="GY"> Guyana </option><option value="HT"> Haiti </option><option value="HM"> Heard Island and Mcdonald Islands </option><option value="VA"> Holy See (Vatican City State) </option><option value="HN"> Honduras </option><option value="HK"> Hong Kong </option><option value="HU"> Hungary </option><option value="IS"> Iceland </option><option value="IN"> India </option><option value="ID"> Indonesia </option><option value="IR"> Iran, Islamic Republic of </option><option value="IQ"> Iraq </option><option value="IE"> Ireland </option><option value="IM"> Isle of Man </option><option value="IL"> Israel </option><option value="IT"> Italy </option><option value="JM"> Jamaica </option><option value="JP"> Japan </option><option value="JE"> Jersey </option><option value="JO"> Jordan </option><option value="KZ"> Kazakhstan </option><option value="KE"> Kenya </option><option value="KI"> Kiribati </option><option value="KP"> Korea, Democratic People's Republic of </option><option value="KR"> Korea, Republic of </option><option value="KW"> Kuwait </option><option value="KG"> Kyrgyzstan </option><option value="LA"> Lao People's Democratic Republic </option><option value="LV"> Latvia </option><option value="LB"> Lebanon </option><option value="LS"> Lesotho </option><option value="LR"> Liberia </option><option value="LY"> Libyan Arab Jamahiriya </option><option value="LI"> Liechtenstein </option><option value="LT"> Lithuania </option><option value="LU"> Luxembourg </option><option value="MO"> Macao </option><option value="MK"> Macedonia, The Former Yugoslav Republic of </option><option value="MG"> Madagascar </option><option value="MW"> Malawi </option><option value="MY"> Malaysia </option><option value="MV"> Maldives </option><option value="ML"> Mali </option><option value="MT"> Malta </option><option value="MH"> Marshall Islands </option><option value="MQ"> Martinique </option><option value="MR"> Mauritania </option><option value="MU"> Mauritius </option><option value="YT"> Mayotte </option><option value="MX"> Mexico </option><option value="FM"> Micronesia, Federated States of </option><option value="MD"> Moldova, Republic of </option><option value="MC"> Monaco </option><option value="MN"> Mongolia </option><option value="ME"> Montenegro </option><option value="MS"> Montserrat </option><option value="MA"> Morocco </option><option value="MZ"> Mozambique </option><option value="MM"> Myanmar </option><option value="NA"> Namibia </option><option value="NR"> Nauru </option><option value="NP"> Nepal </option><option value="NL"> Netherlands </option><option value="AN"> Netherlands Antilles </option><option value="NC"> New Caledonia </option><option value="NZ"> New Zealand </option><option value="NI"> Nicaragua </option><option value="NE"> Niger </option><option value="NG"> Nigeria </option><option value="NU"> Niue </option><option value="NF"> Norfolk Island </option><option value="MP"> Northern Mariana Islands </option><option value="NO"> Norway </option><option value="OM"> Oman </option><option value="PK"> Pakistan </option><option value="PW"> Palau </option><option value="PS"> Palestinian Territory, Occupied </option><option value="PA"> Panama </option><option value="PG"> Papua New Guinea </option><option value="PY"> Paraguay </option><option value="PE"> Peru </option><option value="PH"> Philippines </option><option value="PN"> Pitcairn </option><option value="PL"> Poland </option><option value="PT"> Portugal </option><option value="PR"> Puerto Rico </option><option value="QA"> Qatar </option><option value="RE"> Reunion </option><option value="RO"> Romania </option><option value="RU"> Russian Federation </option><option value="RW"> Rwanda </option><option value="SH"> Saint Helena </option><option value="KN"> Saint Kitts and Nevis </option><option value="LC"> Saint Lucia </option><option value="PM"> Saint Pierre and Miquelon </option><option value="VC"> Saint Vincent and The Grenadines </option><option value="WS"> Samoa </option><option value="SM"> San Marino </option><option value="ST"> Sao Tome and Principe </option><option value="SA"> Saudi Arabia </option><option value="SN"> Senegal </option><option value="RS"> Serbia </option><option value="SC"> Seychelles </option><option value="SL"> Sierra Leone </option><option value="SG"> Singapore </option><option value="SK"> Slovakia </option><option value="SI"> Slovenia </option><option value="SB"> Solomon Islands </option><option value="SO"> Somalia </option><option value="ZA"> South Africa </option><option value="GS"> South Georgia and The South Sandwich Islands </option><option value="ES"> Spain </option><option value="LK"> Sri Lanka </option><option value="SD"> Sudan </option><option value="SR"> Suriname </option><option value="SJ"> Svalbard and Jan Mayen </option><option value="SZ"> Swaziland </option><option value="SE"> Sweden </option><option value="CH"> Switzerland </option><option value="SY"> Syrian Arab Republic </option><option value="TW"> Taiwan, Province of China </option><option value="TJ"> Tajikistan </option><option value="TZ"> Tanzania, United Republic of </option><option value="TH"> Thailand </option><option value="TL"> Timor-leste </option><option value="TG"> Togo </option><option value="TK"> Tokelau </option><option value="TO"> Tonga </option><option value="TT"> Trinidad and Tobago </option><option value="TN"> Tunisia </option><option value="TR"> Turkey </option><option value="TM"> Turkmenistan </option><option value="TC"> Turks and Caicos Islands </option><option value="TV"> Tuvalu </option><option value="UG"> Uganda </option><option value="UA"> Ukraine </option><option value="AE"> United Arab Emirates </option><option value="GB"> United Kingdom </option><option value="US"> United States </option><option value="UM"> United States Minor Outlying Islands </option><option value="UY"> Uruguay </option><option value="UZ"> Uzbekistan </option><option value="VU"> Vanuatu </option><option value="VE"> Venezuela </option><option value="VN"> Viet Nam </option><option value="VG"> Virgin Islands, British </option><option value="VI"> Virgin Islands, U.S. </option><option value="WF"> Wallis and Futuna </option><option value="EH"> Western Sahara </option><option value="YE"> Yemen </option><option value="ZM"> Zambia </option><option value="ZW"> Zimbabwe </option></select>
+	                            </div>
+	                        </div>
+
+	                        <br>
+	                        <hr>
+
+                        	<!-- SECTION 3 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <h2 class="form-header"><span class= "section-number">3</span> Professional Details</h2>
+	                            </div>
+	                        </div>
+
+                        	<!-- Educational Qualifications -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group">
+	                                    <textarea class="form-control" id= "id_qualification" maxlength="1000"placeholder="Summary of Educational Qualification"rows="8" name="qualification"> </textarea> 
+	                                    <span class="help-block">Please provide a brief summary of your educational qualifications. (Max length 1000 characters).</span>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <br>
+
+                        	<!-- Specialization Summary -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group">
+	                                    <textarea class="form-control" id= "id_spec_summary" placeholder= "Summary of Specialization" rows="8" name="spec_summary"></textarea> 
+	                                    <span class="help-block">Please provide a brief summary of your area of specialization or expertise. (Max length 1000 characters).</span>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <br>
+
+	                        <!-- Technical Qualifications -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group">
+	                                    <textarea class="form-control" id= "id_technical" placeholder= "Technical Qualifications, Training Sessions and Seminars"rows="8" name="technical"></textarea> 
+	                                    <span class="help-block">Please provide your full list of Technical Qualifications, Training Sessions or Seminars . (Max length 1000 characters).</span>
+	                                </div>
+	                            </div>
+	                        </div>
+
+                        	<br>
+
+                        	<!-- Current Salary & Required Notice Period -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id= "id_current_salary" placeholder= "Current Monthly Salary (please specify currency)"type="text" name="current_salary" maxlength="50">
+                                    </div>
+	                            </div>
+
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id=
+	                                    "id_notice_period" placeholder=
+	                                    "Required Notice Period (e.g. 1 month)" type="text" name="notice period">
+	                                </div>
+	                            </div>
+	                        </div>
+
+                        	<!-- Current Position Held & Whereabouts -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id="id_current_pos" placeholder="Current Position Held" type="text" name="current_pos">
+	                                </div>
+	                            </div>
+
+	                            <div class="col-md-6">
+	                                <div class="form-group">
+	                                    <input class="form-control" id="id_whereabouts" placeholder="Current Whereabouts" type="text" name="whereabouts">
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <br>
+	                        <hr>
+
+                        	<!-- SECTION 4 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <h2 class="form-header"><span class="section-number">4</span>Salary Expectation </h2>
+	                            </div>
+	                        </div>
+
+                        	<!-- Willingness to work offshore -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <p>Please indicate expected salary in US Dollars only.</p>
+	                                <p>Are you willing to work offshore?</p>
+	                                <label class= "radio-inline"><input id="id_offshore" name="offshore" type="radio" value= "YES">Yes</label>
+	                                <label class="radio-inline"><input id="id_offshore" name= "offshore" type="radio" value="NO">No</label>
+	                            </div>
+	                        </div>
+
+	                        <br>
+	                        <br>
+
+                        	<!-- Salary Expectation -->
+	                        <div class="row">
+	                            <div class="col-md-6">
+	                                <p>Onshore Expected Rate ($/hour)</p>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span>
+	                                        <input class= "form-control" id="id_onshore_singapore" placeholder="Singapore" type="text" name="onshore_singapore"> 
+                                        </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span> 
+	                                        <input class= "form-control" id="id_onshore_asiapac" placeholder="Asia Pacific" type="text" name="onshore_asiapac">
+	                                    </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span>
+	                                        <input class= "form-control" id= "id_onshore_mideast" placeholder= "Middle East" type="text" name="onshore_mideast">
+	                                    </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span>
+	                                        <input class="form-control" id="id_onshore_africa" placeholder="Africa" type="text" name="onshore_africa">
+	                                    </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span> 
+	                                        <input class="form-control" id="id_onshore_europeusa" placeholder="Europe/USA" type="text" name="onshore_europeusa">
+	                                    </div>
+	                                </div>
+	                            </div>
+
+	                            <div class="col-md-6 work-offshore">
+	                                <p>Offshore Expected Rate ($/hour)</p>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span>
+	                                        <input class="form-control" id= "id_offshore_singapore" placeholder= "Singapore" type="text" name="offshore_singapore">
+	                                    </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span>
+	                                        <input class= "form-control" id= "id_offshore_asiapac" placeholder= "Asia Pacific" type="text" name="offshore_asiapac">
+	                                    </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span>
+	                                        <input class= "form-control" id= "id_offshore_mideast" placeholder= "Middle East" type="text" name="offshore_mideast">
+	                                    </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$ (USD)/ Hour</span>
+	                                        <input class= "form-control" id= "id_offshore_africa" placeholder= "Africa" type="text" name="offshore_africa">
+	                                    </div>
+	                                </div>
+
+	                                <div class="col-md-12">
+	                                    <div class="form-group input-group">
+	                                        <span class="input-group-addon">$(USD)/ Hour</span> 
+	                                        <input class="form-control" id="id_offshore_europeusa" placeholder="Europe/USA" type="text" name="offshore_europeusa">
+	                                    </div>
+	                                </div>
+
+	                            </div>
+	                        </div>
+
+	                        <br>
+	                        <hr>
+
+                        	<!-- SECTION 5 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <h2 class="form-header"><span class="section-number">5</span> Other Information</h2>
+	                            </div>
+	                        </div>
+
+                        	<!-- Preferred Places of Work -->
+	                        <div class="row">
+	                            <div class="col-md-3">
+	                                <p>Preferred places of work.</p>
+
+	                                <div class="checkbox">
+	                                    <label><input id="id_preferred_places" name="preferred_places" type="checkbox" value="Singapore">Singapore</label>
+	                                </div>
+
+	                                <div class="checkbox">
+	                                    <label><input id="id_preferred_places" name="preferred_places" type="checkbox" value="Asia Pacific">Asia Pacific</label>
+	                                </div>
+
+	                                <div class="checkbox">
+	                                    <label><input id="id_preferred_places" name="preferred_places" type="checkbox" value="Middle East">Middle East</label>
+	                                </div>
+
+	                                <div class="checkbox">
+	                                    <label><input id="id_preferred_places" name="preferred_places" type="checkbox" value="Africa">Africa</label>
+	                                </div>
+
+	                                <div class="checkbox">
+	                                    <label><input id="id_preferred_places" name="preferred_places" type="checkbox" value="Europe and USA">Europe and USA</label>
+	                                </div>
+	                            </div>
+
+	                            <div class="col-md-9">
+	                                <div class="form-group">
+	                                    <textarea class="form-control" id= "id_describe_self" name="describe_self" placeholder= "Please Briefly Describe Yourself (500 word limit)" rows="7"></textarea>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <br>
+	                        <hr>
+
+                        	<!-- SECTION 6 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <h2 class="form-header"><span class=
+	                                "section-number">6</span> Employment
+	                                History</h2>
+	                            </div>
+	                        </div>
+
+                        	<!-- Employment History -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group">
+	                                    <textarea class="form-control" id= "id_employment_history" placeholder= "Employment History (1000 word limit)" rows="8" name="employment_history">
+	                                    </textarea>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <br>
+	                        	
+	                       	<hr>
+
+                        	<!-- SECTION 7 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <h2 class="form-header"><span class= "section-number">7</span> Upload CV</h2>
+	                            </div>
+	                        </div>
+
+	                        <!-- Upload CV Files -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <span class="label label-default">Supported File Formats:</span> 
+	                                <span class="label label-primary">.doc</span> 
+	                                <span class="label label-primary">.docx</span> 
+	                                <span class="label label-primary">.pdf</span>
+
+	                                <br>
+	                                <br>
+
+	                                <div class="form-group">
+	                                    <input id="id_cv" style="padding:none;"type="file">
+	                                    <p class="help-block">Please upload a copy of your latest CV. Max file size: 4mb.</p>
+	                                </div>
+	                            </div>
+	                        </div>
+
+                            <hr>
+
+                            <!-- SECTION 8 -->
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <h2 class="form-header"><span class="section-number">8</span> Declaration</h2>
+	                            </div>
+	                        </div>
+                            
+                            <!-- Declaration -->
+                            <label for="id_declaration" style="font-weight:normal; color:#121212; font-size:12px;">
+                            <input id="id_declaration" name="declaration" type="checkbox">&nbsp I hereby declare that the information I have provided is true to the best of my knowledge and understand that any false or misleading information may lead to the immediate termination of my application or employment contract.</label>
+
+                            <br>
+
+                            <!-- Terms of Service Agreement -->
+                            <label for="id_tos" style="font-weight:normal; color:#121212; font-size:12px;">
+                            <input id="id_tos" name="tos" type="checkbox">&nbsp I agree that by clicking the "Submit" button, I have read and acknowledged the <a href="#" style="color:#428BCA;"><u>Terms and Conditions</u></a> and <a href="#" style="color:#428BCA;"><u>Privacy Policy</u></a> of the use of this website.</label>
+
+                            <br>
+                            <br>
+
+                            <!-- Submit Button -->
+                            <input class="btn btn-primary btn-lg" type="submit">
+
+                            <br>
+
+                            <div style="clear:both;"></div>
+                    	</form> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End of Sign up Form -->
+
+
+    <!-- Start of Footer -->
+    <div class="footer-container">
+        <div class="container footer-container">
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <img src="{% static "img/footer-logo.png" %}">
+
+                    <p>We strive to bring powerful, affordable solutions to Oil
+                    &amp; Gas construction projects by empowering our clients
+                    with people they can trust.</p>
+                </div>
+
+
+                <div class="col-md-3 col-sm-6">
+                    <ul class="footer-nav">
+                        <li class="nav-title">Site Navigation</li>
+
+                        <li><a href="#">Home</a></li>
+
+                        <li><a href="#">Services</a></li>
+
+                        <li><a href="#">Projects</a></li>
+
+                        <li><a data-target="#contactInfo"
+	                    data-toggle="modal" href=
+	                    "#">Contact</a></li>
+
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <ul class="footer-nav">
+                        <li class="nav-title">ABI Resources & Services.</li>
+
+                        <li>910J Upper Thomson Road</li>
+
+                        <li>Singapore 787112</li>
+
+                        <li>(p): +65 64546066</li>
+
+                        <li>(f): +65 64548891</li>
+
+                        <li>(e): abiadmin@abisingapore.com</li>
+                    </ul>
+                </div>
+
+
+                <div class="col-md-3 col-sm-6">
+                <ul class="footer-nav social-media">
+                    <li class="nav-title">Connect with us.</li>
+
+                    <li style="list-style: none"><br></li>
+
+                    <li><a href=""><i class="fa fa-twitter fa-lg"></i></a></li>
+                    <li><a href=""><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li><a href=""><i class="fa fa-linkedin fa-lg"></i></a></li>
+                    <li><a href=""><i class="fa fa-youtube fa-lg"></i></a></li>
+                </ul><img class="img-responsive accreditation" src=
+                "{% static "img/accreditation.png" %}"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>© ABI Resources &amp; Services PTE LTD 2014.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- End Footer -->
+
+    <!-- jQuery loader -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <!-- Bootstrap.js loader -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    <!-- JS functions -->
+    <script type="text/javascript">
+		$(document).ready(function() {
+
+		        $("input[value$='NO']").click(function(){
+		            $(".work-offshore").hide();
+		        });
+
+		        $("input[value$='YES']").click(function(){
+		            $(".work-offshore").show();
+		        });
+
+
+
+
+		      });
+    </script>
+</body>
+{% endblock %}

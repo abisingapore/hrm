@@ -1,0 +1,353 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<body>
+  <div class="header-container">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="header">
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container-fluid top-navigation">
+                <div class="navbar-header">
+                  <button class="navbar-toggle" data-target=
+                  "#navbar-collapse-1" data-toggle="collapse"
+                  id="toggle-button" type=
+                  "button"><span class="sr-only">Toggle
+                  Navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+
+                  </button> <a href=
+                  "#"><img class="header-logo" src=
+                  "{% static "img/header-logo.png" %}"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id=
+                "navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right" id=
+                  "top-nav-links">
+                    <li><a href="#">Home</a></li>
+
+                    <li><a href=
+                    "services.html">Services</a></li>
+
+                    <li><a href="">Projects</a></li>
+
+                    <li><a data-target="#contactInfo"
+                    data-toggle="modal" href=
+                    "#">Contact</a></li>
+
+                    <li><a href="#">Sign Up</a></li>
+                  </ul>
+                </div><!--Modal-->
+
+                <div class="modal fade" id="contactInfo"
+                tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button class="close"
+                        data-dismiss="modal" type=
+                        "button">×</button>
+
+                        <h4 class="modal-title" id=
+                        "contactInfoLabel">Contact
+                        Us</h4>
+                      </div>
+
+                      <div class="modal-body address">
+                        <form>
+                          <div class="form-group">
+                            <label for=
+                            "exampleInputEmail1">Full
+                            Name</label>
+                            <input class=
+                            "form-control" id=
+                            "exampleInputEmail1"
+                            placeholder=
+                            "Enter email" type=
+                            "email">
+                          </div>
+
+                          <div class="form-group">
+                            <label for=
+                            "exampleInputPassword1">
+                            Email</label>
+                            <input class=
+                            "form-control" id=
+                            "exampleInputPassword1"
+                            placeholder="Password"
+                            type="password">
+                          </div>
+
+                          <div class="form-group">
+                            <label for=
+                            "exampleInputFile">Enquiry</label>
+                            
+                            <textarea class=
+                            "form-control" rows=
+                            "3">
+</textarea>
+                          </div><button class=
+                          "btn btn-default" type=
+                          "submit">Submit</button>
+                        </form><img src="{% static
+                        "img/contact-logo.png" %}"><br>
+
+                        <p>910J Upper Thomson Road</p>
+
+                        <p>Singapore 787112</p>
+
+                        <p><abbr title=
+                        "Phone">P:</abbr> (+65)
+                        64546066</p>
+
+                        <p><abbr title="Fax">F:</abbr>
+                        (+65) 64548891</p>
+
+                        <p>
+                        abiadmin@abisingapore.com</p>
+
+                        <ul class=
+                        "footer-nav modal-social social-media">
+                        <li><a href=""></a></li>
+
+                          <li><a href=""></a></li>
+
+                          <li><a href=""></a></li>
+
+                          <li><a href=""></a></li>
+                        </ul>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button class="btn btn-default"
+                        data-dismiss="modal" type=
+                        "button">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!--endModal-->
+              </div>
+            </nav>
+
+            <h1 class="header-title-big">Find the Right People,<br>
+            For the Right Job.</h1>
+
+            <h6>Manage your Oil &amp; Gas projects with
+            confidence.</h6><br>
+            <br>
+            <button class="btn btn-primary btn-lg header-callout"
+            type="button">How we do it.</button><br>
+            <br>
+            <button class=
+            "btn btn-primary btn-lg header-callout btn-success"
+            type="button">Get in touch with us.</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-container">
+    <div class="container">
+      <div class="row body-section">
+        <div class="col-md-6 visible-sm visible-xs"><img class=
+        "img-responsive" src="{% static "img/box-img-1.png" %}"></div>
+
+        <div class="col-md-12">
+          <h4 class="body-title center-text">What makes a team a
+          team?</h4>
+
+          <p class="body-text center-text">At ABI, we're all about
+          finding the right people for your project. Founded by
+          experts in the Oil &amp; Gas field, we believe that the
+          best people deliver the best results. The ABI family is a
+          vast global network of highly trained Oil &amp; Gas
+          specialists. Carefully hand-picked by our expert panel, we
+          are ready to rapidly mobilize personnel from all over the
+          world to take on your challenges.</p><button class=
+          "btn btn-primary btn-lg header-callout center-img" type=
+          "button">Scope of Services.</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mid-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>A fast, reliable approach.</h3>
+
+          <p>We strive to make your life easy. Oil &amp; Gas projects
+          are notoriously difficult and we understand this perfectly.
+          Our core philosophy is driven towards ultimate customer
+          satisfaction today. Get in touch with us
+          today.</p><button class=
+          "btn btn-primary btn-lg header-callout" type="button">Ask
+          us about your project.</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row body-section">
+      <div class="col-md-12">
+      <h4 class="body-title center-text">International Clientele</h4>
+
+      <p class="body-text center-text">We have successfully worked with
+      over 26 multinational Oil &amp; Gas companies and our list just
+      keeps growing.</p><img class=
+      "center-img img-responsive hidden-xs hidden-sm" src=
+      "{% static "img/client-logos-bw.png" %}"></div>
+
+      <div class="col-md-12">
+        <button class=
+        "btn btn-primary btn-lg header-callout center-img" data-target=
+        "#clientInfo" data-toggle="modal" type="button">View our
+        international client list.</button>
+      </div><!--Modal Client -->
+
+      <div class="modal fade" id="clientInfo" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button class="close" data-dismiss="modal" type=
+              "button">×</button>
+
+              <h4 class="modal-title" id="clientInfoLabel">Our
+              Clients</h4>
+            </div>
+
+            <div class="modal-body address"></div>
+
+            <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss=
+              "modal" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+      </div><!--End Client Modal-->
+
+      <div class="col-md-6 col-sm-12 testimonials">
+        <blockquote>
+          <p>I am really satisfied with their performance and would
+          not hesitate to employ them again in the future, and highly
+          recommend them to any prospective employer looking for a
+          construction management team.</p>
+
+          <p class="quote-name">Hugh McEwan</p><cite title=
+          "Source Title"><strong>Construction Manager, Saipem
+          SA</strong></cite>
+        </blockquote>
+      </div>
+
+      <div class="col-md-6 col-sm-12 testimonials">
+        <blockquote>
+          <p>The work produced by the team was always well organized,
+          well supported, on time and accurate. I have no doubt that
+          this would never have been the success it was without the
+          ABI team's presence.</p>
+
+          <p class="quote-name">Jean Christophe Guibet
+          Lafaye</p><cite title="Source Title"><strong>Kizomba B
+          Project Manager, PRIDE International</strong></cite>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bg" id="bottom-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="body-title center-text">Want a job you
+          love?</h4>
+
+          <p class="body-text center-text">Find out how ABI can help
+          elevate your career and offer a wealth of
+          opportunities.</p><button class=
+          "btn-success btn btn-primary btn-lg header-callout center-img"
+          type="button">Get in touch.</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="footer-container">
+        <div class="container footer-container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <img src="{% static "img/footer-logo.png" %}">
+
+                    <p>We strive to bring powerful, affordable solutions to Oil
+                    &amp; Gas construction projects by empowering our clients
+                    with people they can trust.</p>
+                </div>
+
+
+                <div class="col-md-3 col-sm-6">
+                    <ul class="footer-nav">
+                        <li class="nav-title">Site Navigation</li>
+
+                        <li><a href="#">Home</a></li>
+
+                        <li><a href="#">Services</a></li>
+
+                        <li><a href="#">Projects</a></li>
+
+                        <li><a href="#">Contact</a></li>
+
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <ul class="footer-nav">
+                        <li class="nav-title">ABI Resources & Services.</li>
+
+                        <li>910J Upper Thomson Road</li>
+
+                        <li>Singapore 787112</li>
+
+                        <li>(p): +65 64546066</li>
+
+                        <li>(f): +65 64548891</li>
+
+                        <li>(e): abiadmin@abisingapore.com</li>
+                    </ul>
+                </div>
+
+
+                <div class="col-md-3 col-sm-6">
+                <ul class="footer-nav social-media">
+                    <li class="nav-title">Connect with us.</li>
+
+                    <li style="list-style: none"><br></li>
+
+                    <li><a href=""><i class="fa fa-twitter fa-lg"></i></a></li>
+                    <li><a href=""><i class="fa fa-facebook fa-lg"></i></a></li>
+                    <li><a href=""><i class="fa fa-linkedin fa-lg"></i></a></li>
+                    <li><a href=""><i class="fa fa-youtube fa-lg"></i></a></li>
+                </ul><img class="img-responsive accreditation" src=
+                "{% static "img/accreditation.png" %}"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>© ABI Resources &amp; Services PTE LTD 2014.</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src=
+  "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="{% static "js/bootstrap.min.js" %}"></script>
+</body>
+{% endblock %}

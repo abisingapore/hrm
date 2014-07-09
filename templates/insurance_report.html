@@ -1,0 +1,75 @@
+{% extends "easy_pdf/base.html" %}
+
+{% block extra_style %}
+    <style type="text/css">
+    th, tr {
+        text-align:left;
+        margin-left:0;
+        font-size:8px;
+    }
+
+    td {
+        font-size:8px;
+        background-color: white;
+        border:0.5px solid gray;
+        text-align:center;
+        padding:2px;
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+        <div class="main">
+            <h1 class="title">ABI Personnel Insurance Report as of: {{ latest_report.date }}</h1>
+            <table> <!-- cellspacing='0' is important, must stay -->
+                <tr>
+                    <th>No.</th>
+                    <th>Full Name</th>
+                    <th>Project Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Rate per annum</th>
+                    <th>Total Days Worked</th>
+                    <th>Total Cost(Prorated)</th>
+                    <th>Year</th>
+                    <th>Provider</th>
+                </tr>
+                <!-- Table Header -->
+                {% for report in reports %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ report.full_name }}</td>
+                    <td>{{ report.project_name }}</td>
+                    <td>{{ report.start_date }}</td>
+                    <td>{{ report.end_date }}</td>
+                    <td>{{ report.display_cost }}</td>
+                    <td>{{ report.total_days_worked }}</td>
+                    <td>{{ report.job_cost }}</td>
+                    <td>{{ report.year }}</td>
+                    <td>{{ report.provider }}</td>
+                </tr>
+                {% endfor %}
+                <!-- Table Row -->
+
+
+                <!-- Darker Table Row -->
+
+            </table>
+            <br>
+            <h3>Total Cost: ${{ latest_report.total_cost }}*</h3>
+            <p>* All ongoing contracts have an assumed expiry date of the end of the current policy year.</p>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
