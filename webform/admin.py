@@ -13,6 +13,7 @@ from django.http import HttpResponseRedirect
 from easy_pdf.views import PDFTemplateView, PDFTemplateResponseMixin
 from time import sleep
 from django.utils.safestring import mark_safe
+from django_object_actions import DjangoObjectActions
 #from django.contrib.admin import site
 #import adminactions.actions as actions
 import datetime
@@ -144,12 +145,12 @@ class DateSelectorWidget(widgets.MultiWidget):
         else:
             return str(D)
 
-class EmploymentInline(admin.TabularInline):
+class EmploymentInline(admin.StackedInline):
 	model=EmploymentHistory
 	extra=1
 	formfield_overrides = {
 		models.DateField: {'widget': MonthYearWidget(attrs={'size':'0'})},
-		models.CharField: {'widget': TextInput(attrs={'size':'0'})},
+		
 	}
 	classes = ('grp-collapse grp-closed',)
 	inline_classes = ('grp-collapse grp-closed',)
@@ -157,6 +158,7 @@ class EmploymentInline(admin.TabularInline):
 class EmploymentHistoryAdmin(admin.ModelAdmin):
 	formfield_overrides = {
 		models.DateField: {'widget': MonthYearWidget},
+		models.CharField: {'widget': TextInput(attrs={'size':'100'})},
 	}
 
 class ProfessionalInline(admin.TabularInline):
@@ -183,6 +185,7 @@ class HelloPDFView(PDFTemplateView, PDFTemplateResponseMixin):
 			cv = None
 		return cv
 
+	
 	pdf_filename = str(get_cv().applicant.first_name) + " " + str(get_cv().applicant.last_name) + ".pdf"
 
 
@@ -218,10 +221,11 @@ def generate_cv(modeladmin, request, queryset):
 
 generate_cv.short_description = "Generate CV from selected"
 
-class ApplicantAdmin(admin.ModelAdmin):
+class ApplicantAdmin(DjangoObjectActions, admin.ModelAdmin):
 	search_fields = ['first_name', 'last_name', 'spec_summary__name',]
 	list_filter = ('spec_summary', 'blacklist',)
-	list_display = ('first_name', 'last_name', 'age', 'nationality', 'specialization', 'certification', 'email', 'cv_exists' )
+	alphabet_filter = 'first_name'
+	list_display = ['first_name', 'last_name', 'age', 'nationality', 'specialization', 'certification', 'email', 'cv_exists' ]
 	filter_horizontal = ('spec_summary',)
 #	change_list_template = "admin/change_list_filter_sidebar.html"
 #	change_list_filter_template = "admin/filter_listing.html"
@@ -295,7 +299,28 @@ class ApplicantAdmin(admin.ModelAdmin):
 	inlines = [ EmploymentInline, ProfessionalInline, CertificationInline,
 	]
 
+	list_per_page = 50
 
+	class Media:
+			js = [
+		        '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+		        '/static/grappelli/tinymce_setup/tinymce_setup.js',
+				]
+
+	def get_search_results(self, request, queryset, search_term):
+		queryset, use_distinct = super(ApplicantAdmin, self).get_search_results(request, queryset, search_term)
+		if search_term == None:
+			pass
+		elif search_term == '':
+			pass
+		else:
+			try:
+				certs = Certification.objects.filter(name__name__icontains=search_term)
+				applicants = Applicant.objects.filter(certification__in=certs)
+				queryset |= applicants
+			except:
+				pass
+		return queryset, use_distinct
 
 	def specialization(self, obj):
 		br = mark_safe('<br>')
@@ -307,6 +332,17 @@ class ApplicantAdmin(admin.ModelAdmin):
 		certs = obj.get_certs()
 		html = mark_safe(br.join([c.name.name for c in certs]))
 		return html
+
+	def gen_cv(self, request, obj):
+		item = obj
+		GeneratedCV.objects.all().delete()
+		GeneratedCV.objects.create(applicant=item, latest=True)
+		return HttpResponseRedirect('/generate.pdf')
+
+	gen_cv.label = "Generate Offical ABI CV"
+	gen_cv.short_description = "Generate this candidate's CV for Client Submission."
+	objectactions = ('gen_cv',)
+
 
 class ApplicantForm(forms.ModelForm):
 	class Meta:

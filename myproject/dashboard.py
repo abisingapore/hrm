@@ -42,13 +42,43 @@ class CustomIndexDashboard(Dashboard):
             collapsible=True,
             column=1,
             css_classes=('collapse closed',),
-            exclude=('django.contrib.*',),
+            exclude=('django.contrib.*',
+                'insurance.models.*',
+                'dash.models.*',
+                'webform.models.Contract',
+                'webform.models.EmploymentHistory',
+                ),
+        ))
+
+        self.children.append(modules.AppList(
+            _('Insurance Administration'),
+            collapsible=True,
+            column=1,
+            css_classes=('collapse closed',),
+            exclude=('django.contrib.*',
+                'webform.models.*',
+                'dash.models.*',
+                'insurance.models.Report',
+                ),
+        ))
+
+        self.children.append(modules.AppList(
+            _('Dashboard'),
+            collapsible=True,
+            column=1,
+            css_classes=('collapse closed',),
+            exclude=('django.contrib.*',
+                'webform.models.*',
+                'insurance.models.*',
+                'dash.models.Action',
+                'dash.models.Candidates',
+                ),
         ))
 
 
         self.children.append(modules.LinkList(
             layout='inline',
-            column=2,
+            column=3,
             children=(
                 {
                     'title': 'ABI Website',
@@ -92,8 +122,8 @@ class CustomIndexDashboard(Dashboard):
         # append a recent actions module
         self.children.append(modules.RecentActions(
             _('Recent Actions'),
-            limit=10,
-            collapsible=False,
+            limit=13,
+            collapsible=True,
             column=2,
         ))
 

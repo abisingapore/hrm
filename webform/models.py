@@ -95,7 +95,8 @@ class Applicant(models.Model):
 		verbose_name_plural = "CV Database"
 
 	def full_name(self):
-		return str(self.first_name) + " " + str(self.last_name)
+		string = str(self.first_name) + " " + str(self.last_name)
+		return str(string)
 
 	def cv_exists(self):
 		if self.cv:
@@ -209,6 +210,7 @@ class EmploymentHistory(models.Model):
 
 	class Meta:
 		verbose_name_plural = "Employment History"
+		verbose_name = "Employment History"
 
 class Contract(models.Model):
 	person = models.ForeignKey(Applicant)

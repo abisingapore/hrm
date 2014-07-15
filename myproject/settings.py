@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SESSION_IDLE_TIMEOUT = 3600
 
 # Application definition
 
@@ -38,16 +39,16 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admindocs',
+#    'django.contrib.admindocs',
+    'django-session-idle-timeout',
     'south',
-#   'adminactions',
     'webform',
     'django_countries',
     'easy_pdf',
-#   'captcha',
-#   'dashboard',
+    'dash',
     'insurance',
-
+    'django_object_actions',
+    'alphafilter',
 )
 
 RECAPTCHA_PUBLIC_KEY = '6LdQiPYSAAAAAB-hcaIta92MUxjcCknDAH4UtZUX'
@@ -60,6 +61,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django-session-idle-timeout.middleware.SessionIdleTimeout',
 )
 
 ROOT_URLCONF = 'myproject.urls'
@@ -122,4 +124,4 @@ USE_TZ = True
 STATIC_URL = 'http://abisingapore.webfactional.com/static/'
 
 
-GRAPPELLI_ADMIN_TITLE = "ABI Human Resources Manager v 1.0.0"
+GRAPPELLI_ADMIN_TITLE = "Human Resources Manager"

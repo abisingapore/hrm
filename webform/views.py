@@ -11,7 +11,8 @@ import json
 
 
 def index(request):
-	return render_to_response('index.html', context_instance=RequestContext(request))
+	applicants = Applicant.objects.all().count()
+	return render_to_response('index.html', {'applicant_count':applicants}, context_instance=RequestContext(request))
 
 def signup(request):
 	class ApplicantForm(ModelForm):

@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import admin
 from webform.admin import HelloPDFView
 from insurance.admin import HelloPDFViewInsurance
+from django.contrib.auth.decorators import login_required
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,9 +14,10 @@ urlpatterns = patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     (r'^grappelli/', include('grappelli.urls')), #grappelli URLs
 #   (r'^adminactions/', include('adminactions.urls')),
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+#    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^$', 'webform.views.index', name="index"),
     url(r'^signup/', include('webform.urls')),
     url(r"^generate.pdf$", HelloPDFView.as_view()),
     url(r"^generate_insurance.pdf$", HelloPDFViewInsurance.as_view()),
+    url(r'^django-session-idle-timeout/', include('django-session-idle-timeout.urls')),
 )
