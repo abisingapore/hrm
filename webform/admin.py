@@ -18,6 +18,7 @@ from django_object_actions import DjangoObjectActions
 #import adminactions.actions as actions
 import datetime
 import re
+from django.core.exceptions import MultipleObjectsReturned
 
 from django.forms.widgets import Widget, Select
 from django.utils.dates import MONTHS
@@ -172,6 +173,7 @@ class CertificationInline(admin.TabularInline):
 	extra=1
 	classes = ('grp-collapse grp-closed',)
 	inline_classes = ('grp-collapse grp-closed',)
+	sortable_field_name = "position"
 
 
 
@@ -186,12 +188,12 @@ class HelloPDFView(PDFTemplateView, PDFTemplateResponseMixin):
 		return cv
 
 	
-	pdf_filename = str(get_cv().applicant.first_name) + " " + str(get_cv().applicant.last_name) + ".pdf"
+	pdf_filename = ""
 
 
 	def get_context_data(self, **kwargs):
 		cv = GeneratedCV.objects.get(latest=True)
-		self.pdf_filename = str(cv.applicant.first_name) + str(cv.applicant.last_name) + ".pdf"
+		self.pdf_filename = "ABI CV - " + str(cv.applicant.proposed_specialization) + " - " + str(cv.applicant.full_name()) + ".pdf"
 		certification = cv.applicant.certification_set.all()
 		qualification = cv.applicant.professional_set.all()
 		history = cv.applicant.employmenthistory_set.all().order_by('-start_date')
@@ -199,6 +201,10 @@ class HelloPDFView(PDFTemplateView, PDFTemplateResponseMixin):
 			first = history[0]
 		except IndexError:
 			first = None
+		try:
+			first_cert = certification[0]
+		except IndexError:
+			first_cert = None
 		specialization = "\n | ".join([p.name for p in cv.applicant.spec_summary.all()])
 	    	return super(HelloPDFView, self).get_context_data(pagesize="A4", 
 	    		applicant=cv.applicant,
@@ -207,12 +213,16 @@ class HelloPDFView(PDFTemplateView, PDFTemplateResponseMixin):
 	    		certification=certification,
 	    		history=history,
 	    		first=first,
+	    		first_cert=first_cert,
 	    		**kwargs)
 
 
 
 def generate_cv(modeladmin, request, queryset):
-	item = queryset.get()
+	try:
+		item = queryset.get()
+	except:
+		item = None
 	GeneratedCV.objects.all().delete()
 	GeneratedCV.objects.create(applicant=item, latest=True)
 	return HttpResponseRedirect('/generate.pdf')
@@ -229,7 +239,6 @@ class ApplicantAdmin(DjangoObjectActions, admin.ModelAdmin):
 	filter_horizontal = ('spec_summary',)
 #	change_list_template = "admin/change_list_filter_sidebar.html"
 #	change_list_filter_template = "admin/filter_listing.html"
-	actions = [generate_cv]
 	exclude = ('confirm_email',)
 	fieldsets = (
 		('Personal Information', {
@@ -299,7 +308,7 @@ class ApplicantAdmin(DjangoObjectActions, admin.ModelAdmin):
 	inlines = [ EmploymentInline, ProfessionalInline, CertificationInline,
 	]
 
-	list_per_page = 50
+	list_per_page = 25
 
 	class Media:
 			js = [
@@ -330,7 +339,7 @@ class ApplicantAdmin(DjangoObjectActions, admin.ModelAdmin):
 	def certification(self, obj):
 		br = mark_safe('<br>')
 		certs = obj.get_certs()
-		html = mark_safe(br.join([c.name.name for c in certs]))
+		html = mark_safe(br.join([str(c.name) for c in certs]))
 		return html
 
 	def gen_cv(self, request, obj):

@@ -127,10 +127,12 @@ class Applicant(models.Model):
 
 class Certification(models.Model):
 	name = models.ForeignKey(CertNames, null=True, blank=True)
+	remarks = models.CharField(max_length=150, null=True, blank=True, help_text="e.g. Awarding institution, country etc.")
 	registration_number = models.CharField(max_length=100, null=True, blank=True, help_text="Cert Reg. Number (if applicable)")
 	expiry_date = models.DateField(null=True, blank=True)
 	valid = models.BooleanField(default=True)
 	applicant = models.ForeignKey(Applicant, null=True, blank=True)
+	position = models.PositiveSmallIntegerField("Position")
 
 	def save(self, *args, **kwargs):
 		today = date.today()
@@ -144,9 +146,10 @@ class Certification(models.Model):
 		super(Certification, self).save(*args, **kwargs)
 
 	def __unicode__(self):
-		return self.name.name
+		return self.name
 
 	class Meta:
+		ordering = ['position']
 		verbose_name = "Technical Certification"
 		verbose_name_plural = "Technical Certifications"
 
@@ -200,9 +203,9 @@ class EmploymentHistory(models.Model):
 	start_date = models.DateField()
 	end_date = models.DateField()
 	company_name = models.CharField(max_length=100)
-	project_name = models.CharField(max_length=100)
+	project_name = models.CharField(max_length=100, null=True, blank=True)
 	position_held = models.CharField(max_length=100)
-	responsibilities = models.TextField()
+	responsibilities = models.TextField(null=True, blank=True)
 	applicant = models.ForeignKey(Applicant)
 
 	def __unicode__(self):

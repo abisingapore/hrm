@@ -137,12 +137,6 @@
         }
 
 
-
-        .separator {
-            -pdf-keep-with-next:false;
-            font-size:6pt;
-        }
-
         .label {
             background-color:#186cab;
             color:#fff;
@@ -231,6 +225,14 @@
             text-align:justify;
         }
 
+        .abisum,
+        .abisum ul,
+        .abisum ul li{
+            font-size:14px;
+            text-align:justify;
+            font-weight:normal;
+        }
+
         #responsibility p{
             line-height:1.5em;
         }
@@ -250,7 +252,7 @@
 
         <h2 class="larger"><span class="cv_name">{{ applicant.first_name|capfirst }} <b class="blue">{{ applicant.last_name|capfirst }}</b></span></h2>
         <p class="specialization">{{ applicant.proposed_specialization|capfirst }}</p>
-        <p class="important">Age: <b>{{ applicant.age }}</b> | Nationality: <b>{{ applicant.nationality.name }}<img src="{{ STATIC_URL }}flags/{{ applicant.nationality|lower }}.jpg"></b> | Gender: <b>{{ applicant.gender|lower|capfirst }}</b> </p>
+        <p class="important">{% if applicant.date_of_birth %}Age: <b>{{ applicant.age }}</b> |{% endif %} {% if applicant.nationality %}Nationality: <b>{{ applicant.nationality.name }}<img src="{{ STATIC_URL }}flags/{{ applicant.nationality|lower }}.jpg"></b> |{% endif %} Gender: <b>{{ applicant.gender|lower|capfirst }}</b> </p>
         {% if applicant.add_nationality %}
         <p class="important">Additional Visas: <b>{{ applicant.add_nationality.name }} {{ applicant.add_nat_status }}</b></p>
         {% endif %}
@@ -259,7 +261,7 @@
         <h3 class="large label">Summary of Experience</h3><br>
         <div class="abisum">{{ applicant.abi_summary|safe }}</div><br>
 
-
+        {% if qualification %}
         <h3 class="large label">Professional Qualifications</h3><br>
         {% for q in qualification %}
         <p><b>{{ q.qualification }} {{ q.discipline }}</b></p>
@@ -270,9 +272,8 @@
         <p>Year of Completion: {{ q.year_of_completion }}</p>
         {% endif %}
         <hr class="style-three">
-        <br>
         {% endfor %}
-        <br>
+        {% endif %}
 
         {% if certification %}
         <div class="chunk">
@@ -281,8 +282,29 @@
                 <tr>
                     <td>
                         {% for c in certification %}
-                        <p><b>{{ forloop.counter }}</b>. {{ c.name }} {% if c.registration_number %}| Reg.No: {{ c.registration_number }}{% endif %} {% if c.expiry_date %}| Expiry Date: {{ c.expiry_date }}{% endif %}</p>
+                        <p>
+                            <b>{{ forloop.counter }}</b>. {{ c.name }} {% if c.registration_number %}| Reg.No: {{ c.registration_number }}{% endif %} {% if c.expiry_date %}| Expiry Date: {{ c.expiry_date }}{% endif %}
+                            {% if c == first_cert %}</div>{% endif %}
+                        </p>
                         {% endfor %}
+                    </td>
+                </tr>
+            </table>
+        <br>
+        {% endif %}
+
+        {% if applicant.language_proficiency or applicant.computer_literacy %}
+        <div class="chunk">
+            <h3 class="large label">Skills</h3><br>
+            <table>
+                <tr>
+                    <td style="width:30%; text-align:left;">
+                        {% if applicant.language_proficiency %}<p>Language Proficiency:</p>{% endif %}
+                        {% if applicant.computer_literacy %}<p>IT Skills:</p>{% endif %}
+                    </td>
+                    <td>
+                        {% if applicant.language_proficiency %}<p>{{ applicant.language_proficiency|safe }}</p>{% endif %}
+                        {% if applicant.computer_literacy %}<p>{{ applicant.computer_literacy|safe }}</p>{% endif %}
                     </td>
                 </tr>
             </table>
@@ -291,74 +313,55 @@
         {% endif %}
 
 
-        <div class="chunk">
-            <h3 class="large label">Skills</h3><br>
-            <table>
-                <tr>
-                    <td style="width:30%; text-align:left;">
-                        <p>Language Proficiency:</p>
-                        <p>IT Skills:</p>
-                    </td>
-                    <td>
-                        <p>{{ applicant.language_proficiency|safe }}</p>
-                        <p>{{ applicant.computer_literacy|safe }}</p>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <br>
-
-
             {% for h in history %}
             {% if h == first %}
-            <div class="chunk">
-            <h3 class="large label">Employment History</h3><br><br>{% endif %}
+            <h3 class="large label">Employment History</h3><br>{% endif %}
+                <div class="chunk">
                 <table>
+                    {% if h.company_name %}    
                     <tr>
                         <td style="width:20%; text-align:left;">
                             <p>Company:</p>
                         </td>
                         <td style="width:59%; text-align:left;">
-                            <p>{{ h.company_name }}</p>
+                            <p><b>{{ h.company_name }}</b></p>
                         </td>
                         <td style="width:21%;"><span class="date blue" align="right">{{ h.start_date|date:"M Y" }} to {{ h.end_date|date:"M Y" }}</span></td>
                     </tr>
+                    {% endif %}
+                    {% if h.project_name %}
                     <tr>
                         <td style="width:20%; text-align:left;">
                             <p>Project Name:</p>
                         </td>
                         <td style="text-align:left;">
-                            <p>{{ h.project_name }}</p>
+                            <p><b>{{ h.project_name }}<b></p>
                         </td>
                     </tr>
+                    {% endif %}
                     <tr>
                         <td style="width:20%; text-align:left;">
                             <p>Position Held:</p>
                         </td>
                         <td>
-                            <p>{{ h.position_held }}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p><b><u>Responsibilities:</u></b></p>
-                        </td>
-                        <td>
-                            <p>&nbsp;</p>
+                            <p><b>{{ h.position_held }}<b></p>
                         </td>
                     </tr>
                 </table>
-            </div>
-            <div class="separator" style="margin:0; padding:0; line-height:0;">&nbsp;</div>
-            <div style="margin-left:4px;">
-                <div id="responsibility">
-                    {{ h.responsibilities|safe }}   
                 </div>
-            </div>
-            
-
+                <div class="separator">&nbsp;</div>
+                {% if h.responsibilities %}
+                <div class="chunk">
+                    <p><b><u>Responsibilities:</u></b></p>
+                    <div style="margin-left:4px;">
+                        <div id="responsibility">
+                            {{ h.responsibilities|safe }}   
+                        </div>
+                    </div>
+                </div>
+                <div class="separator">&nbsp;</div>
+                {% endif %}
             <hr>
-
             {% endfor %}
 
 

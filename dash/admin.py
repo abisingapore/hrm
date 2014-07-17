@@ -1,6 +1,7 @@
 from django.contrib import admin
 from dash.models import *
 from django.utils.safestring import mark_safe
+from django.utils.text import capfirst
 
 class ActionInline(admin.TabularInline):
 	model=Action
@@ -51,13 +52,13 @@ class RequestAdmin(admin.ModelAdmin):
 		actionlist = [] 
 		for a in actions:
 			if a.status == 'Complete':
-				actionlist.append(mark_safe('<span style="color:#5cb85c; text-decoration: line-through;">%s</span>') % a.action)
+				actionlist.append(mark_safe('<span style="color:#5cb85c; text-decoration: line-through;">%s</span>') % capfirst(a.action))
 			elif a.status == 'Urgent':
-				actionlist.append(mark_safe('<span style="color:#d9534f; border:2px solid #d9534f;">!! %s</span>') % a.action)
+				actionlist.append(mark_safe('<div style="padding:2px; border:2px solid #d9534f;"><span style="color:#d9534f;">!! %s</span></div>') % capfirst(a.action))
 			elif a.status == 'New':
-				actionlist.append(mark_safe('<span style="color:#f0ad4e; border:2px solid #f0ad4e">%s</span>') % a.action)
+				actionlist.append(mark_safe('<div style="padding:2px; border:2px solid #f0ad4e;"><span style="color:#f0ad4e;"> %s</span></div>') % capfirst(a.action))
 			elif a.status == 'Cancelled':
-				actionlist.append(mark_safe('<span style="text-decoration: line-through;">%s</span>') % a.action)				
+				actionlist.append(mark_safe('<span style="text-decoration: line-through;">%s</span>') % capfirst(a.action))				
 
 		html = mark_safe(br.join([p for p in actionlist]))
 		return html

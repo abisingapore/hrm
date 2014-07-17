@@ -1,0 +1,45 @@
+{% extends "admin/change_list.html" %}
+{% load admin_list alphafilter %}
+{% block extrastyle %}
+{{block.super}}
+	<style type="text/css" media="screen">
+	.change-list ul.alphabetfilter li {
+		width: 0.7em;
+	}
+
+	.change-list ul.alphabetfilter li span {
+		background:white;
+	}
+
+	ul.alphabetfilter li a {
+		background-image:linear-gradient(#eeeeee, #e0e0e0);
+		padding:3px;
+		border:1px solid #bdbdbd;
+		border-radius:5px;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+	}
+
+	.change-list ul.alphabetfilter li.first {
+		width: 0.7em;
+	}
+	.inactive {
+		color: #999;
+		background-image:linear-gradient(#eeeeee, #e0e0e0);
+		padding:3px;
+		border:1px solid #bdbdbd;
+		border-radius:5px;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+	}
+	.selected {
+		color: red;
+		background-image:linear-gradient(#eeeeee, #e0e0e0);
+		padding:3px;
+		border-radius:5px;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+	}
+	</style>
+{% endblock %}
+{% block date_hierarchy %}{% date_hierarchy cl %}{% alphabet cl %}{% endblock %}
