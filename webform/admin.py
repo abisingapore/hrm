@@ -170,7 +170,7 @@ class ProfessionalInline(admin.TabularInline):
 
 class CertificationInline(admin.TabularInline):
 	model=Certification
-	extra=1
+	extra=0
 	classes = ('grp-collapse grp-closed',)
 	inline_classes = ('grp-collapse grp-closed',)
 	sortable_field_name = "position"

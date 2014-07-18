@@ -276,15 +276,14 @@
         {% endif %}
 
         {% if certification %}
-        <div class="chunk">
             <h3 class="large label">Technical Certifications</h3><br>
             <table>
                 <tr>
                     <td>
                         {% for c in certification %}
                         <p>
-                            <b>{{ forloop.counter }}</b>. {{ c.name }} {% if c.registration_number %}| Reg.No: {{ c.registration_number }}{% endif %} {% if c.expiry_date %}| Expiry Date: {{ c.expiry_date }}{% endif %}
-                            {% if c == first_cert %}</div>{% endif %}
+                            <b>{{ forloop.counter }}</b>. {{ c.name }} {% if c.remarks %}{{ c.remarks }}{% endif %} {% if c.registration_number %}| Reg.No: {{ c.registration_number }}{% endif %} {% if c.expiry_date %}| Expiry Date: {{ c.expiry_date }}{% endif %}
+                            {% if c == first_cert %}{% endif %}
                         </p>
                         {% endfor %}
                     </td>

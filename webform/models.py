@@ -129,10 +129,10 @@ class Certification(models.Model):
 	name = models.ForeignKey(CertNames, null=True, blank=True)
 	remarks = models.CharField(max_length=150, null=True, blank=True, help_text="e.g. Awarding institution, country etc.")
 	registration_number = models.CharField(max_length=100, null=True, blank=True, help_text="Cert Reg. Number (if applicable)")
-	expiry_date = models.DateField(null=True, blank=True)
+	expiry_date = models.DateField(null=True, blank=True, help_text="optional")
 	valid = models.BooleanField(default=True)
 	applicant = models.ForeignKey(Applicant, null=True, blank=True)
-	position = models.PositiveSmallIntegerField("Position")
+	position = models.PositiveSmallIntegerField("Position", help_text="Order of Sequence to appear on CV")
 
 	def save(self, *args, **kwargs):
 		today = date.today()
